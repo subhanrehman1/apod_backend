@@ -1,0 +1,8 @@
+{"clientVersion":"4.5.0","code":"P2009","component":"user-service","level":"error","meta":{"query_position":"Query.findFirstplanetary_data.where.planetary_dataWhereInput.date","query_validation_error":"Unable to match input value to any allowed input type for the field. Parse errors: [Query parsing/validation error at `Query.findFirstplanetary_data.where.planetary_dataWhereInput.date`: A value is required but not set., Query parsing/validation error at `Query.findFirstplanetary_data.where.planetary_dataWhereInput.date`: A value is required but not set.]"},"timestamp":"2022-10-30 21:12:32"}
+{"clientVersion":"4.5.0","component":"user-service","level":"error","timestamp":"2022-10-30 22:47:58"}
+{"clientVersion":"4.5.0","component":"user-service","level":"error","timestamp":"2022-10-30 22:57:22"}
+{"clientVersion":"4.5.0","component":"user-service","level":"error","timestamp":"2022-10-30 23:13:58"}
+{"clientVersion":"4.5.0","component":"user-service","level":"error","timestamp":"2022-10-30 23:21:28"}
+{"clientVersion":"4.5.0","component":"user-service","level":"error","timestamp":"2022-10-30 23:21:44"}
+{"clientVersion":"4.5.0","component":"user-service","level":"error","timestamp":"2022-10-30 23:22:35"}
+{"clientVersion":"4.5.0","component":"user-service","level":"error","timestamp":"2022-10-30 23:22:37"}
