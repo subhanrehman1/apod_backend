@@ -17,6 +17,7 @@ export const apodController: any = async (req: Request, res: Response) => {
     }
     return res.status(statusCodes.success).send(responseData);
   } catch (err: any) {
+    console.log(err);
     apodLogger.error(err);
     return res
       .status(statusCodes.notFound)

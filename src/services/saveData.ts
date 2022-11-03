@@ -16,6 +16,7 @@ export const saveData: any = async (date: Date) => {
       },
     });
   } catch (err: any) {
+    console.log(err);
     apodLogger.error(err);
     return { status: false, message: "Data cannot be get for the given date" };
   }
@@ -27,35 +28,40 @@ export const saveData: any = async (date: Date) => {
       if (!data) {
         return { status: false, message: "Data not found for given date" };
       }
-      const imageName: string = `image${Date.now()}`;
-      try {
-        const fileData: any = await uploadImage(
-          data.url,
-          `${__dirname}/../public/uploads/${imageName}.jpg`
-        );
-        if (!fileData) {
+      let imageName: string | null = `image${Date.now()}`;
+      if (data.media_type === "image") {
+        try {
+          const fileData: any = await uploadImage(
+            data.url,
+            `${__dirname}/../public/uploads/${imageName}.jpg`
+          );
+          if (!fileData) {
+            return { status: false, message: "Image uploading failed" };
+          }
+        } catch (err: any) {
+          console.log(err);
+          apodLogger.error(err);
+
           return { status: false, message: "Image uploading failed" };
         }
-      } catch (err: any) {
-        apodLogger.error(err);
-
-        return { status: false, message: "Image uploading failed" };
+      } else {
+        imageName = null;
       }
       if (data) {
         planetaryData = await prisma.planetary_data.create({
           data: {
-            copyright: data.copyright,
             date: new Date(date),
             explanation: data.explanation,
-            hd_url: data.hdurl,
             media_type: data.media_type,
             title: data.title,
-            url: `${getConfig.image_url}${imageName}.jpg`,
+            url: data.url || `${getConfig.image_url}${imageName}.jpg`,
           },
         });
       }
       return { status: true, planetaryData };
     } catch (err: any) {
+      console.log(err);
+
       apodLogger.error(err);
 
       return {

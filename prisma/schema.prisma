@@ -9,10 +9,8 @@ datasource db {
 
 model planetary_data {
   id          Int      @id @default(autoincrement())
-  copyright   String   @db.VarChar(255)
   date        DateTime @db.Date
   explanation String   @db.Text
-  hd_url      String   @db.VarChar(255)
   media_type  String   @db.VarChar(255)
   title       String   @db.VarChar(255)
   url         String   @db.VarChar(255)

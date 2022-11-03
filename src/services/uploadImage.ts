@@ -15,8 +15,8 @@ export const uploadImage: any = async (url: string, filepath: string) => {
         .once("close", () => resolve(filepath));
     });
   } catch (err: any) {
+    console.log(err);
     apodLogger.error(err);
-
     return false;
   }
 };

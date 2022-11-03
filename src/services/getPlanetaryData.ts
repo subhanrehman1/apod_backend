@@ -11,6 +11,7 @@ export const getPlanetaryData: any = async (date: Date) => {
     );
     return response.data;
   } catch (err: any) {
+    console.log(err);
     apodLogger.error(err);
     return false;
   }
