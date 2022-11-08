@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getPlanetaryData } from "../services/getPlanetaryData";
+import { responseMsg } from "../constants/responseMsg";
 import { statusCodes } from "../constants/statusCodes";
 import { saveData } from "../services/saveData";
 import { apodLogger } from "../utils/logger";
@@ -21,6 +21,6 @@ export const apodController: any = async (req: Request, res: Response) => {
     apodLogger.error(err);
     return res
       .status(statusCodes.notFound)
-      .json({ status: false, message: "Something went wrong" });
+      .json({ status: false, message: responseMsg.ControllerErrorMsg });
   }
 };

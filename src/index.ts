@@ -12,7 +12,7 @@ app.use(
 );
 
 //to serve static files or images in the given directory0
-app.use(express.static("src/public/uploads"));
+app.use(express.static(`${getConfig.db_image_url}`));
 
 app.use(getConfig.api_url, router);
 app.listen(getConfig.port, () => {

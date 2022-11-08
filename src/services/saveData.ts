@@ -2,8 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import { getPlanetaryData } from "./getPlanetaryData";
 import { uploadImage } from "./uploadImage";
 import { getConfig } from "../config/config";
-import { statusCodes } from "../constants/statusCodes";
 import { apodLogger } from "../utils/logger";
+import { responseMsg } from "../constants/responseMsg";
 
 const prisma = new PrismaClient();
 
@@ -18,7 +18,7 @@ export const saveData: any = async (date: Date) => {
   } catch (err: any) {
     console.log(err);
     apodLogger.error(err);
-    return { status: false, message: "Data cannot be get for the given date" };
+    return { status: false, message: responseMsg.DataNotFound };
   }
   if (planetaryData) {
     return { status: true, planetaryData };
@@ -26,7 +26,7 @@ export const saveData: any = async (date: Date) => {
     try {
       const data: any = await getPlanetaryData(date);
       if (!data) {
-        return { status: false, message: "Data not found for given date" };
+        return { status: false, message: responseMsg.ApodApiFailed };
       }
       let imageName: string | null = `image${Date.now()}`;
       if (data.media_type === "image") {
@@ -36,13 +36,13 @@ export const saveData: any = async (date: Date) => {
             `${__dirname}/../public/uploads/${imageName}.jpg`
           );
           if (!fileData) {
-            return { status: false, message: "Image uploading failed" };
+            return { status: false, message: responseMsg.ImgUploadingFailed };
           }
         } catch (err: any) {
           console.log(err);
           apodLogger.error(err);
 
-          return { status: false, message: "Image uploading failed" };
+          return { status: false, message: responseMsg.ImgUploadingFailed };
         }
       } else {
         imageName = null;
@@ -66,7 +66,7 @@ export const saveData: any = async (date: Date) => {
 
       return {
         status: false,
-        message: "Data cannot be get for the given date",
+        message: responseMsg.DataNotFound,
       };
     }
   }
